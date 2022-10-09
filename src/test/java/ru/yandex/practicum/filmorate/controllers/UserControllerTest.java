@@ -3,7 +3,8 @@ package ru.yandex.practicum.filmorate.controllers;
 import org.junit.jupiter.api.Test;
 import ru.yandex.practicum.filmorate.exceptions.ValidationException;
 import ru.yandex.practicum.filmorate.model.User;
-import java.time.LocalDateTime;
+
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,7 +15,7 @@ class UserControllerTest {
     void addUserWithEmptyEmail() {
         ValidationException ex = assertThrows(
                 ValidationException.class, () -> userController.addUser(new User(1, null, "Shark",
-                        "qwe1", LocalDateTime.now()))
+                        "qwe1", LocalDate.now()))
         );
     }
 
@@ -22,7 +23,7 @@ class UserControllerTest {
     void addUserWithWrongEmail() {
         ValidationException ex = assertThrows(
                 ValidationException.class, () -> userController.addUser(new User(1, "null", "Shark",
-                        "qwe1", LocalDateTime.now()))
+                        "qwe1", LocalDate.now()))
         );
     }
 
@@ -30,7 +31,7 @@ class UserControllerTest {
     void addUserWithEmptyLogin() {
         ValidationException ex = assertThrows(
                 ValidationException.class, () -> userController.addUser(new User(1, "null@", "",
-                        "qwe1", LocalDateTime.now()))
+                        "qwe1", LocalDate.now()))
         );
     }
 
@@ -38,7 +39,7 @@ class UserControllerTest {
     void addUserLoginWithSpaces() {
         ValidationException ex = assertThrows(
                 ValidationException.class, () -> userController.addUser(new User(1, "nul@l", "Sha rk",
-                        "qwe1", LocalDateTime.now()))
+                        "qwe1", LocalDate.now()))
         );
     }
 
@@ -46,7 +47,7 @@ class UserControllerTest {
     void addUserWithWrongBirthday() {
         ValidationException ex = assertThrows(
                 ValidationException.class, () -> userController.addUser(new User(1, "null@", "Shark",
-                        "qwe1", LocalDateTime.now().plusHours(1)))
+                        "qwe1", LocalDate.now().plusDays(1)))
         );
     }
 }
